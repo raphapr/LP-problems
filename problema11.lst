@@ -1,0 +1,229 @@
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 1
+11: O Problema da Clínica Cirúrgica
+C o m p i l a t i o n
+
+
+   2   
+       
+      ## Variáveis de decisão
+       
+      x1 = Número de cirurgias estéticas
+      x2 = Número de cirurgias ortopédicas
+       
+      ## Função Objetivo
+       
+      Maximizar
+      z = 30*x1 + 10*x2
+       
+      Receita total
+       
+      ## Restrições
+       
+      a) Restrições de disponibilidade de salas de consulta:
+       
+      2*x1 + 2*x2 <= 36
+       
+      b) Restrição de disponibilidade no centro cirúrgico:
+       
+      2*x1 + x2 <= 24
+       
+      b) Restrições de demanda:
+       
+      Cirurgias estéticas:    x1 >= 2
+      Cirurgias ortopédicas:  x2 >= 4
+       
+      ## Resultado
+       
+      Depois de aplicado o algoritmo, os resultados foram:
+       
+      x1 = 10 cirurgias estéticas
+      x2 = 4 cirurgias ortopédicas
+       
+      Com esses valores, a função objetivo é: 
+       
+      z  = 340 (receita total)
+       
+  44   
+  45  Positive Variable
+  46   
+  47  x1 Número de cirurgias estéticas
+  48  x2 Número de cirurgias ortopédicas;
+  49   
+  50  Free Variables
+  51   
+  52  z Receita total;
+  53   
+  54  Equations
+  55   
+  56  obj    Função objetivo: Receita total
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 2
+11: O Problema da Clínica Cirúrgica
+C o m p i l a t i o n
+
+
+  57  restr1 Restrição 1
+  58  restr2 Restrição 2
+  59  restr3 Restrição 3
+  60  restr4 Restrição 4;
+  61   
+  62  obj.. z =e= 30*x1 + 10*x2;
+  63  restr1.. 2*x1 + 2*x2 =l= 36;
+  64  restr2.. 2*x1 + x2 =l= 24;
+  65  restr3.. x1 =g= 2;
+  66  restr4.. x2 =g= 4;
+  67   
+  68  model problema11 /all/;
+  69   
+  70  solve problema11 using mip max z;
+
+
+COMPILATION TIME     =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 3
+11: O Problema da Clínica Cirúrgica
+Equation Listing    SOLVE problema11 Using MIP From line 70
+
+
+---- obj  =E=  Função objetivo: Receita total
+
+obj..  - 30*x1 - 10*x2 + z =E= 0 ; (LHS = 0)
+     
+
+---- restr1  =L=  Restrição 1
+
+restr1..  2*x1 + 2*x2 =L= 36 ; (LHS = 0)
+     
+
+---- restr2  =L=  Restrição 2
+
+restr2..  2*x1 + x2 =L= 24 ; (LHS = 0)
+     
+
+---- restr3  =G=  Restrição 3
+
+restr3..  x1 =G= 2 ; (LHS = 0, INFES = 2 ****)
+     
+
+---- restr4  =G=  Restrição 4
+
+restr4..  x2 =G= 4 ; (LHS = 0, INFES = 4 ****)
+     
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 4
+11: O Problema da Clínica Cirúrgica
+Column Listing      SOLVE problema11 Using MIP From line 70
+
+
+---- x1  Número de cirurgias estéticas
+
+x1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -30       obj
+        2       restr1
+        2       restr2
+        1       restr3
+
+
+---- x2  Número de cirurgias ortopédicas
+
+x2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       obj
+        2       restr1
+        1       restr2
+        1       restr4
+
+
+---- z  Receita total
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 5
+11: O Problema da Clínica Cirúrgica
+Model Statistics    SOLVE problema11 Using MIP From line 70
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS            5
+BLOCKS OF VARIABLES           3     SINGLE VARIABLES            3
+NON ZERO ELEMENTS             9
+
+
+GENERATION TIME      =        0.004 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+
+
+EXECUTION TIME       =        0.004 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 6
+11: O Problema da Clínica Cirúrgica
+Solution Report     SOLVE problema11 Using MIP From line 70
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   problema11          OBJECTIVE  z
+     TYPE    MIP                 DIRECTION  MAXIMIZE
+     SOLVER  CPLEX               FROM LINE  70
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE              340.0000
+
+ RESOURCE USAGE, LIMIT          0.005      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 LEG x86 64bit/Linux      
+Cplex 12.6.3.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.00sec (det. 0.01 ticks)
+Optimal solution found.
+Objective :         340.000000
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+---- EQU restr1            -INF           28.0000        36.0000          .          
+---- EQU restr2            -INF           24.0000        24.0000        15.0000      
+---- EQU restr3             2.0000        10.0000        +INF             .          
+---- EQU restr4             4.0000         4.0000        +INF           -5.0000      
+
+  obj  Função objetivo: Receita total
+  restr1  Restrição 1
+  restr2  Restrição 2
+  restr3  Restrição 3
+  restr4  Restrição 4
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR x1                  .            10.0000        +INF             .          
+---- VAR x2                  .             4.0000        +INF             .          
+---- VAR z                 -INF          340.0000        +INF             .          
+
+  x1  Número de cirurgias estéticas
+  x2  Número de cirurgias ortopédicas
+  z  Receita total
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:41 Page 7
+11: O Problema da Clínica Cirúrgica
+Solution Report     SOLVE problema11 Using MIP From line 70
+
+
+EXECUTION TIME       =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      /media/hdd/Cloud/gamsdir/Trabalho/problema11.gms
+Output     /media/hdd/Cloud/gamsdir/Trabalho/problema11.lst

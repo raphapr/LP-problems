@@ -1,0 +1,301 @@
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 1
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+C o m p i l a t i o n
+
+
+   2   
+       
+      ## Variáveis de decisão
+       
+      x1 (1A) = Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 15cm x 2000 cm
+      x2 (1B) = Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 14cm x 3000 cm
+      x3 (2A) = Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 15cm x 2000 cm
+      x4 (3A) = Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 15cm x 2000 cm
+      x5 (3B) = Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 14cm x 3000 cm
+      x6 (2B) = Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 14cm x 3000 cm
+       
+      ## Função Objetivo
+       
+      Maximizar
+      z = 2*x1 + (1.2)*x2 + x3 + 3*x4 + (1.2)*(2)*(x5)
+       
+      Custo total obtido por: custo do corte + perda x custo da perda.
+       
+      ## Restrições
+       
+      a) Restrições de demanda:
+       
+      Placa 2x4cm^2
+       
+      7*x1 + 7*x2 + 2*x3 + x4 + x5 >= 2500
+       
+      Placa 4x11cm^2
+       
+      x3 + x4 + x6 + x5 >= 1000
+       
+      b) Restrição de disponibilidade de estoque:
+       
+      Tira 15x2000cm^2
+       
+      4*x1 + 4*x3 + 4*x4 <= 2000
+       
+      Tira 14x3000cm^2
+       
+      4*x2 + 4*x6 + 4*x5 <= 3000
+       
+      ## Resultado
+       
+      Depois de aplicado o algoritmo, os resultados foram:
+       
+      x1 = 0
+      x2 = 222.2222
+      x3 = 472.2222
+      x4 = 0
+      x5 = 0
+      x6 = 527.7778
+       
+      Com esses valores, a função objetivo é: 
+       
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 2
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+C o m p i l a t i o n
+
+
+      z = 738.8889  (custo total)
+       
+  59   
+  60  Positive Variable
+  61   
+  62  x1 Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 15cm x 2000 cm (1A)
+  63  x2 Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 14cm x 3000 cm (1B)
+  64  x3 Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 15cm x 2000 cm (2A)
+  65  x4 Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 15cm x 2000 cm (3A)
+  66  x5 Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 14cm x 3000 cm (3B)
+  67  x6 Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 14cm x 3000 cm (2B);
+  68   
+  69  Free Variables
+  70   
+  71  z Custo total obtido por: custo do corte + perda x custo da perda;
+  72   
+  73  Equations
+  74   
+  75  obj    Função objetivo: Custo total
+  76  restr1 Restrição 1
+  77  restr2 Restrição 2
+  78  restr3 Restrição 3
+  79  restr4 Restrição 4;
+  80   
+  81  obj.. z =e= 2*x1 + (1.2)*x2 + x3 + 3*x4 + (1.2)*(2)*(x5);
+  82  restr1.. 7*x1 + 7*x2 + 2*x3 + x4 + x5 =g= 2500;
+  83  restr2.. x3 + x4 + x6 + x5 =g= 1000;
+  84  restr3.. 4*x1 + 4*x3 + 4*x4 =l= 2000;
+  85  restr4.. 4*x2 + 4*x6 + 4*x5 =l= 3000;
+  86   
+  87  model problema21 /all/;
+  88   
+  89  solve problema21 using mip min z;
+
+
+COMPILATION TIME     =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 3
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Equation Listing    SOLVE problema21 Using MIP From line 89
+
+
+---- obj  =E=  Função objetivo: Custo total
+
+obj..  - 2*x1 - 1.2*x2 - x3 - 3*x4 - 2.4*x5 + z =E= 0 ; (LHS = 0)
+     
+
+---- restr1  =G=  Restrição 1
+
+restr1..  7*x1 + 7*x2 + 2*x3 + x4 + x5 =G= 2500 ; (LHS = 0, INFES = 2500 ****)
+     
+
+---- restr2  =G=  Restrição 2
+
+restr2..  x3 + x4 + x5 + x6 =G= 1000 ; (LHS = 0, INFES = 1000 ****)
+     
+
+---- restr3  =L=  Restrição 3
+
+restr3..  4*x1 + 4*x3 + 4*x4 =L= 2000 ; (LHS = 0)
+     
+
+---- restr4  =L=  Restrição 4
+
+restr4..  4*x2 + 4*x5 + 4*x6 =L= 3000 ; (LHS = 0)
+     
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 4
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Column Listing      SOLVE problema21 Using MIP From line 89
+
+
+---- x1  Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 15cm x 2000 cm (1A)
+
+x1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -2       obj
+        7       restr1
+        4       restr3
+
+
+---- x2  Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 14cm x 3000 cm (1B)
+
+x2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1.2     obj
+        7       restr1
+        4       restr4
+
+
+---- x3  Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 15cm x 2000 cm (2A)
+
+x3
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       obj
+        2       restr1
+        1       restr2
+        4       restr3
+
+
+---- x4  Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 15cm x 2000 cm (3A)
+
+x4
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -3       obj
+        1       restr1
+        1       restr2
+        4       restr3
+
+
+---- x5  Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 14cm x 3000 cm (3B)
+
+x5
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -2.4     obj
+        1       restr1
+        1       restr2
+        4       restr4
+
+
+---- x6  Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 14cm x 3000 cm (2B)
+
+x6
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       restr2
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 5
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Column Listing      SOLVE problema21 Using MIP From line 89
+
+
+     x6  Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 14cm x 3000 cm (2B)
+
+        4       restr4
+
+
+---- z  Custo total obtido por: custo do corte + perda x custo da perda
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 6
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Model Statistics    SOLVE problema21 Using MIP From line 89
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS            5
+BLOCKS OF VARIABLES           7     SINGLE VARIABLES            7
+NON ZERO ELEMENTS            21
+
+
+GENERATION TIME      =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+
+
+EXECUTION TIME       =        0.004 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 7
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Solution Report     SOLVE problema21 Using MIP From line 89
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   problema21          OBJECTIVE  z
+     TYPE    MIP                 DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  89
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE              738.8889
+
+ RESOURCE USAGE, LIMIT          0.005      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 LEG x86 64bit/Linux      
+Cplex 12.6.3.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.00sec (det. 0.01 ticks)
+Optimal solution found.
+Objective :         738.888889
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+---- EQU restr1          2500.0000      2500.0000        +INF            0.2444      
+---- EQU restr2          1000.0000      1000.0000        +INF            0.5111      
+---- EQU restr3            -INF         1888.8889      2000.0000          .          
+---- EQU restr4            -INF         3000.0000      3000.0000        -0.1278      
+
+  obj  Função objetivo: Custo total
+  restr1  Restrição 1
+  restr2  Restrição 2
+  restr3  Restrição 3
+  restr4  Restrição 4
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR x1                  .              .            +INF            0.2889      
+---- VAR x2                  .           222.2222        +INF             .          
+---- VAR x3                  .           472.2222        +INF             .          
+---- VAR x4                  .              .            +INF            2.2444      
+---- VAR x5                  .              .            +INF            2.1556      
+---- VAR x6                  .           527.7778        +INF             .          
+---- VAR z                 -INF          738.8889        +INF             .          
+
+  x1  Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 15cm x 2000 cm (1A)
+  x2  Número de vezes que o padrão 1 de corte será aplicado sobre a tira de 14cm x 3000 cm (1B)
+  x3  Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 15cm x 2000 cm (2A)
+  x4  Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 15cm x 2000 cm (3A)
+  x5  Número de vezes que o padrão 3 de corte será aplicado sobre a tira de 14cm x 3000 cm (3B)
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:43 Page 8
+21: O Problema de Otimização de Padrão de Corte em Placas Planas
+Solution Report     SOLVE problema21 Using MIP From line 89
+
+
+  x6  Número de vezes que o padrão 2 de corte será aplicado sobre a tira de 14cm x 3000 cm (2B)
+  z  Custo total obtido por: custo do corte + perda x custo da perda
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+
+
+EXECUTION TIME       =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      /media/hdd/Cloud/gamsdir/Trabalho/problema21.gms
+Output     /media/hdd/Cloud/gamsdir/Trabalho/problema21.lst

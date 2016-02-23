@@ -1,0 +1,273 @@
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 1
+10: O Problema do Jantar de Nero
+C o m p i l a t i o n
+
+
+   2   
+       
+      ## Variáveis de decisão
+       
+      x1 = número de envenenados do sexo masculino
+      x2 = número de envenenados do sexo feminino
+      x3 = número de envenenados pelo veneno alfa
+      x4 = número de envenenados pelo veneno beta
+       
+      ## Função Objetivo
+       
+      Maximizar
+      z = x1 + x2 + x3 + x4
+       
+      Número total de envenenados.
+       
+      ## Restrições
+       
+      a) Restrições de disponibilidade de veneno:
+       
+      Tipo alfa: 12*x1 + 6*x2 <= 500
+      Tipo beta: 6*x3 + 3*x4 <= 2000
+       
+      b) Restrição devida ao paladar:
+       
+      (12*x1 + 6*x2) / (6*x3 + 3*x4) = 3
+       
+      Pode ser transformada em uma restrição linear
+       
+      12*x1 + 6*x2 = 18*x3 + 9*x4;
+       
+      c) Restrições de demanda:
+       
+      Homens envenenados:     x1 + x2 <= 20
+      Mulheres envenanadas:   x3 + x4 <= 10
+       
+      ## Resultado
+       
+      Depois de aplicado o algoritmo, os resultados foram:
+       
+      x1 = 10 envenenados do sexo masculino
+      x2 = 10 envenenados do sexo feminino
+      x3 = 0  envenenados pelo veneno alfa
+      x4 = 10 envenenados pelo veneno beta
+       
+      Com esses valores, a função objetivo é: 
+       
+      z  = 30 (total de envenenados)
+       
+  53   
+  54  Positive Variable
+  55   
+  56  x1 Número de envenenados do sexo masculino
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 2
+10: O Problema do Jantar de Nero
+C o m p i l a t i o n
+
+
+  57  x2 Número de envenenados do sexo feminino
+  58  x3 Número de envenenados pelo veneno alfa
+  59  x4 Número de envenenados pelo veneno beta;
+  60   
+  61  Free Variables
+  62   
+  63  z Número total de envenenados;
+  64   
+  65  Equations
+  66   
+  67  obj    Função objetivo: Número total de envenenados
+  68  restr1 Restrição 1
+  69  restr2 Restrição 2
+  70  restr3 Restrição 3
+  71  restr4 Restrição 4
+  72  restr5 Restrição 5;
+  73   
+  74  obj.. z =e= x1 + x2 + x3 + x4;
+  75  restr1.. 12*x1 + 6*x2 =l= 500;
+  76  restr2.. 6*x3 + 3*x4 =l= 2000;
+  77  restr3.. 12*x1 + 6*x2 =e= 18*x3 + 9*x4;
+  78  restr4.. x1 + x2 =l= 20;
+  79  restr5.. x3 + x4 =l= 10;
+  80   
+  81  model problema10 /all/;
+  82   
+  83  solve problema10 using mip max z;
+
+
+COMPILATION TIME     =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 3
+10: O Problema do Jantar de Nero
+Equation Listing    SOLVE problema10 Using MIP From line 83
+
+
+---- obj  =E=  Função objetivo: Número total de envenenados
+
+obj..  - x1 - x2 - x3 - x4 + z =E= 0 ; (LHS = 0)
+     
+
+---- restr1  =L=  Restrição 1
+
+restr1..  12*x1 + 6*x2 =L= 500 ; (LHS = 0)
+     
+
+---- restr2  =L=  Restrição 2
+
+restr2..  6*x3 + 3*x4 =L= 2000 ; (LHS = 0)
+     
+
+---- restr3  =E=  Restrição 3
+
+restr3..  12*x1 + 6*x2 - 18*x3 - 9*x4 =E= 0 ; (LHS = 0)
+     
+
+---- restr4  =L=  Restrição 4
+
+restr4..  x1 + x2 =L= 20 ; (LHS = 0)
+     
+
+---- restr5  =L=  Restrição 5
+
+restr5..  x3 + x4 =L= 10 ; (LHS = 0)
+     
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 4
+10: O Problema do Jantar de Nero
+Column Listing      SOLVE problema10 Using MIP From line 83
+
+
+---- x1  Número de envenenados do sexo masculino
+
+x1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       obj
+       12       restr1
+       12       restr3
+        1       restr4
+
+
+---- x2  Número de envenenados do sexo feminino
+
+x2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       obj
+        6       restr1
+        6       restr3
+        1       restr4
+
+
+---- x3  Número de envenenados pelo veneno alfa
+
+x3
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       obj
+        6       restr2
+      -18       restr3
+        1       restr5
+
+
+---- x4  Número de envenenados pelo veneno beta
+
+x4
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       obj
+        3       restr2
+       -9       restr3
+        1       restr5
+
+
+---- z  Número total de envenenados
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 5
+10: O Problema do Jantar de Nero
+Model Statistics    SOLVE problema10 Using MIP From line 83
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           6     SINGLE EQUATIONS            6
+BLOCKS OF VARIABLES           5     SINGLE VARIABLES            5
+NON ZERO ELEMENTS            17
+
+
+GENERATION TIME      =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+
+
+EXECUTION TIME       =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 6
+10: O Problema do Jantar de Nero
+Solution Report     SOLVE problema10 Using MIP From line 83
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   problema10          OBJECTIVE  z
+     TYPE    MIP                 DIRECTION  MAXIMIZE
+     SOLVER  CPLEX               FROM LINE  83
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE               30.0000
+
+ RESOURCE USAGE, LIMIT          0.006      1000.000
+ ITERATION COUNT, LIMIT         3    2000000000
+
+IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 LEG x86 64bit/Linux      
+Cplex 12.6.3.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.00sec (det. 0.01 ticks)
+Optimal solution found.
+Objective :          30.000000
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+---- EQU restr1            -INF          180.0000       500.0000          .          
+---- EQU restr2            -INF           60.0000      2000.0000          .          
+---- EQU restr3              .              .              .             EPS         
+---- EQU restr4            -INF           20.0000        20.0000         1.0000      
+---- EQU restr5            -INF           10.0000        10.0000         1.0000      
+
+  obj  Função objetivo: Número total de envenenados
+  restr1  Restrição 1
+  restr2  Restrição 2
+  restr3  Restrição 3
+  restr4  Restrição 4
+  restr5  Restrição 5
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR x1                  .            10.0000        +INF             .          
+---- VAR x2                  .            10.0000        +INF             .          
+---- VAR x3                  .            10.0000        +INF             .          
+---- VAR x4                  .              .            +INF            EPS         
+---- VAR z                 -INF           30.0000        +INF             .          
+
+  x1  Número de envenenados do sexo masculino
+  x2  Número de envenenados do sexo feminino
+  x3  Número de envenenados pelo veneno alfa
+  x4  Número de envenenados pelo veneno beta
+  z  Número total de envenenados
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:37 Page 7
+10: O Problema do Jantar de Nero
+Solution Report     SOLVE problema10 Using MIP From line 83
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+
+
+EXECUTION TIME       =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      /media/hdd/Cloud/gamsdir/Trabalho/problema10.gms
+Output     /media/hdd/Cloud/gamsdir/Trabalho/problema10.lst
