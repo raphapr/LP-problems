@@ -4,10 +4,10 @@ $Ontext
 
 ## Variáveis de decisão
 
-x1 = número de envenenados do sexo masculino
-x2 = número de envenenados do sexo feminino
-x3 = número de envenenados pelo veneno alfa
-x4 = número de envenenados pelo veneno beta
+x1 = número de envenenados do sexo masculino pelo veneno alfa
+x2 = número de envenenados do sexo feminino pelo veneno alfa
+x3 = número de envenenados do sexo masculino pelo veneno beta
+x4 = número de envenenados do sexo feminino pelo veneno beta
 
 ## Função Objetivo
 
@@ -40,10 +40,10 @@ Mulheres envenanadas:   x3 + x4 <= 10
 
 Depois de aplicado o algoritmo, os resultados foram:
 
-x1 = 10 envenenados do sexo masculino
-x2 = 10 envenenados do sexo feminino
-x3 = 0  envenenados pelo veneno alfa
-x4 = 10 envenenados pelo veneno beta
+x1 = 10 envenenados do sexo masculino pelo veneno alfa
+x2 = 10 envenenados do sexo feminino pelo veneno alfa
+x3 = 0  envenenados do sexo masculino pelo veneno beta
+x4 = 10 envenenados do sexo feminino pelo veneno beta
 
 Com esses valores, a função objetivo é: 
 
@@ -53,10 +53,10 @@ $Offtext
 
 Positive Variable
 
-x1 Número de envenenados do sexo masculino
-x2 Número de envenenados do sexo feminino
-x3 Número de envenenados pelo veneno alfa
-x4 Número de envenenados pelo veneno beta;
+x1 Número de envenenados do sexo masculino pelo veneno alfa
+x2 Número de envenenados do sexo feminino pelo veneno alfa
+x3 Número de envenenados do sexo masculino pelo veneno beta
+x4 Número de envenenados do sexo feminino pelo veneno beta;
 
 Free Variables
 
