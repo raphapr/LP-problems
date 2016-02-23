@@ -1,6 +1,6 @@
 # Problemas de Programação Linear
 
-Problemas de programação linear resolvidos utilizando a ferramenta [GAMS](https://www.gams.com/).
+Problemas resolvidos de programação linear utilizando a ferramenta [GAMS](https://www.gams.com/).
 
 **Livro:** Programação Linear e Fluxos em Redes (1ª Edição)
 
