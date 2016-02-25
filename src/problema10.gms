@@ -65,11 +65,11 @@ z Número total de envenenados;
 Equations
 
 obj    Função objetivo: Número total de envenenados
-restr1 Restrição 1
-restr2 Restrição 2
-restr3 Restrição 3
-restr4 Restrição 4
-restr5 Restrição 5;
+restr1 Restrição 1: Disponibilidade: 12g de alfa e 6g de beta são suficientes para matar um homem. No máximo 500g de veneno no estoque
+restr2 Restrição 2: Disponibilidade: 6g de alfa e 3g de beta para matar uma mulher no máximo 2000g de veneno no estoque (50% mais poderoso para a mulher)
+restr3 Restrição 3: Paladar: três porções de alfa para cada porção de beta
+restr4 Restrição 4: No mínimo 20 homens envenenados
+restr5 Restrição 5: No mínimo 10 mulheres envenenadas;
 
 obj.. z =e= x1 + x2 + x3 + x4;
 restr1.. 12*x1 + 6*x2 =l= 500;

@@ -54,10 +54,10 @@ z Receita total;
 Equations
 
 obj    Função objetivo: Receita total
-restr1 Restrição 1
-restr2 Restrição 2
-restr3 Restrição 3
-restr4 Restrição 4;
+restr1 Restrição 1: Disponibilidade de salas de consulta. 2h de atendimento por consulta
+restr2 Restrição 2: Disponibilidade no centro cirúrgico. Cirurgias estéticas duram 2h e cirurgias ortopédicas duram 1h para máximo de 24h
+restr3 Restrição 3: Demanda: no mínimo 2 cirurgias estéticas
+restr4 Restrição 4: Demanda: no mínimo 4 cirurgias ortopédicas;
 
 obj.. z =e= 30*x1 + 10*x2;
 restr1.. 2*x1 + 2*x2 =l= 36;

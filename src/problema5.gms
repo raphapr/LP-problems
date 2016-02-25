@@ -54,9 +54,9 @@ z Maximizar lucro sabendo que camisa longa custa 5.0 UM e camisa manga curta cus
 Equations
 
 obj    Função objetivo: Maximizar lucro
-restr1 Restrição 1
-restr2 Restrição 2
-restr3 Restrição 3;
+restr1 Restrição 1: Demanda de mercado: limite diário de 150 camisas longas
+restr2 Restrição 2: Demanda de mercado: limite diário de 300 camisas curtas
+restr3 Restrição 3: 50% a mais de camisas longas + camisas curtas tem que alcancar o limite total de 400;
 
 obj.. z =e= 5*x1 + (7/2)*x2;
 restr1.. x1 =l= 150;

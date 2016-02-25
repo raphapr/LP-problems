@@ -73,10 +73,10 @@ z Custo total obtido por: custo do corte + perda x custo da perda;
 Equations
 
 obj    Função objetivo: Custo total
-restr1 Restrição 1
-restr2 Restrição 2
-restr3 Restrição 3
-restr4 Restrição 4;
+restr1 Restrição 1: demanda:
+restr2 Restrição 2: demanda:
+restr3 Restrição 3: disponibilidade de estoque:
+restr4 Restrição 4: disponibilidade de estoque: ;
 
 obj.. z =e= 2*x1 + (1.2)*x2 + x3 + 3*x4 + (1.2)*(2)*(x5);
 restr1.. 7*x1 + 7*x2 + 2*x3 + x4 + x5 =g= 2500;
