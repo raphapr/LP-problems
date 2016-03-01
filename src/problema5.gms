@@ -1,4 +1,4 @@
-$Title 5: O problema da Produção de Camisetas
+$Title problema5
 
 $Ontext
 
@@ -42,12 +42,12 @@ z  = 1383.3333 (total de unidades obtidas como lucro)
 
 $Offtext
 
-Positive Variable
+Positive Variables
 
 x1 Camisa longa
 x2 Camisa curta;
 
-Free Variables
+Variables
 
 z Maximizar lucro sabendo que camisa longa custa 5.0 UM e camisa manga curta custa 3.5 UM;
 
@@ -58,10 +58,10 @@ restr1 Restrição 1: Demanda de mercado: limite diário de 150 camisas longas
 restr2 Restrição 2: Demanda de mercado: limite diário de 300 camisas curtas
 restr3 Restrição 3: 50% a mais de camisas longas + camisas curtas tem que alcancar o limite total de 400;
 
-obj.. z =e= 5*x1 + (7/2)*x2;
+obj.. z =e= 5*x1 + 3.5*x2;
 restr1.. x1 =l= 150;
 restr2.. x2 =l= 300;
-restr3.. (3/2)*x1 + x2 =e= 400;
+restr3.. 1.5*x1 + x2 =l= 400;
 
 model problema5 /all/;
 
