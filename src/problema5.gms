@@ -42,7 +42,7 @@ z  = 1383.3333 (total de unidades obtidas como lucro)
 
 $Offtext
 
-Positive Variables
+Integer Variables
 
 x1 Camisa longa
 x2 Camisa curta;
