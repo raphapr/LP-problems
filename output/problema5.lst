@@ -1,5 +1,5 @@
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 1
-5: O problema da Produção de Camisetas
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 1
+problema5
 C o m p i l a t i o n
 
 
@@ -44,31 +44,31 @@ C o m p i l a t i o n
       z  = 1383.3333 (total de unidades obtidas como lucro)
        
   44   
-  45  Positive Variable
+  45  Integer Variables
   46   
   47  x1 Camisa longa
   48  x2 Camisa curta;
   49   
-  50  Free Variables
+  50  Variables
   51   
   52  z Maximizar lucro sabendo que camisa longa custa 5.0 UM e camisa manga curta custa 3.5 UM;
   53   
   54  Equations
   55   
   56  obj    Função objetivo: Maximizar lucro
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 2
-5: O problema da Produção de Camisetas
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 2
+problema5
 C o m p i l a t i o n
 
 
-  57  restr1 Restrição 1
-  58  restr2 Restrição 2
-  59  restr3 Restrição 3;
+  57  restr1 Restrição 1: Demanda de mercado: limite diário de 150 camisas longas
+  58  restr2 Restrição 2: Demanda de mercado: limite diário de 300 camisas curtas
+  59  restr3 Restrição 3: 50% a mais de camisas longas + camisas curtas tem que alcancar o limite total de 400;
   60   
-  61  obj.. z =e= 5*x1 + (7/2)*x2;
+  61  obj.. z =e= 5*x1 + 3.5*x2;
   62  restr1.. x1 =l= 150;
   63  restr2.. x2 =l= 300;
-  64  restr3.. (3/2)*x1 + x2 =e= 400;
+  64  restr3.. 1.5*x1 + x2 =l= 400;
   65   
   66  model problema5 /all/;
   67   
@@ -76,8 +76,8 @@ C o m p i l a t i o n
 
 
 COMPILATION TIME     =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 3
-5: O problema da Produção de Camisetas
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 3
+problema5
 Equation Listing    SOLVE problema5 Using MIP From line 68
 
 
@@ -86,29 +86,29 @@ Equation Listing    SOLVE problema5 Using MIP From line 68
 obj..  - 5*x1 - 3.5*x2 + z =E= 0 ; (LHS = 0)
      
 
----- restr1  =L=  Restrição 1
+---- restr1  =L=  Restrição 1: Demanda de mercado: limite diário de 150 camisas longas
 
 restr1..  x1 =L= 150 ; (LHS = 0)
      
 
----- restr2  =L=  Restrição 2
+---- restr2  =L=  Restrição 2: Demanda de mercado: limite diário de 300 camisas curtas
 
 restr2..  x2 =L= 300 ; (LHS = 0)
      
 
----- restr3  =E=  Restrição 3
+---- restr3  =L=  Restrição 3: 50% a mais de camisas longas + camisas curtas tem que alcancar o limite total de 400
 
-restr3..  1.5*x1 + x2 =E= 400 ; (LHS = 0, INFES = 400 ****)
+restr3..  1.5*x1 + x2 =L= 400 ; (LHS = 0)
      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 4
-5: O problema da Produção de Camisetas
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 4
+problema5
 Column Listing      SOLVE problema5 Using MIP From line 68
 
 
 ---- x1  Camisa longa
 
 x1
-                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+                (.LO, .L, .UP, .M = 0, 0, 100, 0)
        -5       obj
         1       restr1
         1.5     restr3
@@ -117,7 +117,7 @@ x1
 ---- x2  Camisa curta
 
 x2
-                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+                (.LO, .L, .UP, .M = 0, 0, 100, 0)
        -3.5     obj
         1       restr2
         1       restr3
@@ -129,8 +129,12 @@ z
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       obj
 
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 5
-5: O problema da Produção de Camisetas
+
+****
+****  2 Integer +INF Bounds have been reset to 100 (see Option IntVarUp)
+****
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 5
+problema5
 Model Statistics    SOLVE problema5 Using MIP From line 68
 
 
@@ -138,15 +142,15 @@ MODEL STATISTICS
 
 BLOCKS OF EQUATIONS           4     SINGLE EQUATIONS            4
 BLOCKS OF VARIABLES           3     SINGLE VARIABLES            3
-NON ZERO ELEMENTS             7
+NON ZERO ELEMENTS             7     DISCRETE VARIABLES          2
 
 
-GENERATION TIME      =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GENERATION TIME      =        0.002 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
 
 
-EXECUTION TIME       =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 6
-5: O problema da Produção de Camisetas
+EXECUTION TIME       =        0.002 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 6
+problema5
 Solution Report     SOLVE problema5 Using MIP From line 68
 
 
@@ -158,9 +162,9 @@ Solution Report     SOLVE problema5 Using MIP From line 68
 
 **** SOLVER STATUS     1 Normal Completion         
 **** MODEL STATUS      1 Optimal                   
-**** OBJECTIVE VALUE             1383.3333
+**** OBJECTIVE VALUE              850.0000
 
- RESOURCE USAGE, LIMIT          0.004      1000.000
+ RESOURCE USAGE, LIMIT          0.084      1000.000
  ITERATION COUNT, LIMIT         0    2000000000
 
 IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 LEG x86 64bit/Linux      
@@ -168,32 +172,46 @@ Cplex 12.6.3.0
 
 Space for names approximately 0.00 Mb
 Use option 'names no' to turn use of names off
-LP status(1): optimal
+MIP status(101): integer optimal solution
+Cplex Time: 0.07sec (det. 0.01 ticks)
+Fixing integer variables, and solving final LP...
+Fixed MIP status(1): optimal
 Cplex Time: 0.00sec (det. 0.00 ticks)
-Optimal solution found.
-Objective :        1383.333333
+Proven optimal solution.
+
+MIP Solution:          850.000000    (0 iterations, 0 nodes)
+Final Solve:           850.000000    (0 iterations)
+
+Best possible:         850.000000
+Absolute gap:            0.000000
+Relative gap:            0.000000
 
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
 ---- EQU obj                 .              .              .             1.0000      
----- EQU restr1            -INF           66.6667       150.0000          .          
----- EQU restr2            -INF          300.0000       300.0000         0.1667      
----- EQU restr3           400.0000       400.0000       400.0000         3.3333      
+---- EQU restr1            -INF          100.0000       150.0000          .          
+---- EQU restr2            -INF          100.0000       300.0000          .          
+---- EQU restr3            -INF          250.0000       400.0000          .          
 
   obj  Função objetivo: Maximizar lucro
-  restr1  Restrição 1
-  restr2  Restrição 2
-  restr3  Restrição 3
+  restr1  Restrição 1: Demanda de mercado: limite diário de 150 camisas longas
+  restr2  Restrição 2: Demanda de mercado: limite diário de 300 camisas curtas
+  restr3  Restrição 3: 50% a mais de camisas longas + camisas curtas tem que alcancar o limite total de 400
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
----- VAR x1                  .            66.6667        +INF             .          
----- VAR x2                  .           300.0000        +INF             .          
----- VAR z                 -INF         1383.3333        +INF             .          
+---- VAR x1                  .           100.0000       100.0000         5.0000      
+---- VAR x2                  .           100.0000       100.0000         3.5000      
+---- VAR z                 -INF          850.0000        +INF             .          
 
   x1  Camisa longa
   x2  Camisa curta
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/25/16 16:56:38 Page 7
+problema5
+Solution Report     SOLVE problema5 Using MIP From line 68
+
+
   z  Maximizar lucro sabendo que camisa longa custa 5.0 UM e camisa manga curta custa 3.5 UM
 
 
@@ -203,9 +221,6 @@ Objective :        1383.333333
 
 
 EXECUTION TIME       =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      02/23/16 03:03:26 Page 7
-5: O problema da Produção de Camisetas
-Solution Report     SOLVE problema5 Using MIP From line 68
 
 
 USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
@@ -214,5 +229,5 @@ USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
 
 **** FILE SUMMARY
 
-Input      /media/hdd/Cloud/gamsdir/Trabalho/problema5.gms
-Output     /media/hdd/Cloud/gamsdir/Trabalho/problema5.lst
+Input      /home/raphael/LP-problems/src/problema5.gms
+Output     /home/raphael/LP-problems/src/problema5.lst

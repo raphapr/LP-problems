@@ -31,8 +31,8 @@ z Minimizar gastos sabendo que o Petróleo BR custa 8 o AR custa 12 e o xisto cu
 Equations
 
 obj   Função objetivo - Minimizar o uso dos recursos
-rest1 Restrição 1 - 5P onde P é o penúltimo número da matrícula
-rest2 Restrição 2 - 3U onde U é o último número da matrícula;
+rest1 Restrição 1 - 5P onde P é o penúltimo número da matrícula - produzir no máximo 51 milhões de barris de gasolina
+rest2 Restrição 2 - 3U onde U é o último número da matrícula - produzir no máximo 32 milhões de barris de óleo;
 
 obj.. z =e= 8*x1 + 12*x2 + 15*x3;
 rest1.. x1 + 2*x2 =g= 51;

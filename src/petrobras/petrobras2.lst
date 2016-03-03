@@ -1,4 +1,4 @@
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 1
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 1
 petrobas2
 C o m p i l a t i o n
 
@@ -7,36 +7,46 @@ C o m p i l a t i o n
        
       O Problema da Petrobrás
        
-   8   
-   9  Positive Variable
-  10   
-  11  x1 Petróleo BR
-  12  x2 Petróleo AR
-  13  x3 Xisto;
-  14   
-  15  Free Variables
-  16   
-  17  z Minimizar gastos sabendo que o Petróleo BR custa 8 o AR custa 12 e o xisto custa 13;
+      Custo do Xisto = 13
+       
+      Temos x1 = 0, x2 = 12 e x3 = 13,
+      onde x1 representa o custo necessário para utilizar recursos do Petróleo BRA
+      x2 do Petróleo AR
+      x3 do Xisto,
+      variáveis primais.
+       
+      Utilizando esses valores, z é igual a 319 e o valor marginal é 1.
+       
   18   
-  19  Equations
+  19  Positive Variable
   20   
-  21  obj   Função objetivo - Minimizar o uso dos recursos
-  22  rest1 Restrição 1 - 5P onde P é o penúltimo número da matrícula
-  23  rest2 Restrição 2 - 3U onde U é o último número da matrícula;
+  21  x1 Petróleo BR
+  22  x2 Petróleo AR
+  23  x3 Xisto;
   24   
-  25  obj.. z =e= 8*x1 + 12*x2 + 13*x3;
-  26  rest1.. x1 + 2*x2 + 2*x3 =g= 51;
-  27  rest2.. x1 + x2 + (3/2)*x3 =g= 32;
+  25  Free Variables
+  26   
+  27  z Minimizar gastos sabendo que o Petróleo BR custa 8 o AR custa 12 e o xisto custa 13;
   28   
-  29  model petrobras2 /all/;
+  29  Equations
   30   
-  31  solve petrobras2 using mip min z;
+  31  obj   Função objetivo - Minimizar o uso dos recursos
+  32  rest1 Restrição 1 - 5P onde P é o penúltimo número da matrícula - produzir no máximo 51 milhões de barris de gasolina
+  33  rest2 Restrição 2 - 3U onde U é o último número da matrícula - produzir no máximo 32 milhões de barris de óleo;
+  34   
+  35  obj.. z =e= 8*x1 + 12*x2 + 13*x3;
+  36  rest1.. x1 + 2*x2 + 2*x3 =g= 51;
+  37  rest2.. x1 + x2 + (3/2)*x3 =g= 32;
+  38   
+  39  model petrobras2 /all/;
+  40   
+  41  solve petrobras2 using mip min z;
 
 
-COMPILATION TIME     =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 2
+COMPILATION TIME     =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 2
 petrobas2
-Equation Listing    SOLVE petrobras2 Using MIP From line 31
+Equation Listing    SOLVE petrobras2 Using MIP From line 41
 
 
 ---- obj  =E=  Função objetivo - Minimizar o uso dos recursos
@@ -44,18 +54,18 @@ Equation Listing    SOLVE petrobras2 Using MIP From line 31
 obj..  - 8*x1 - 12*x2 - 13*x3 + z =E= 0 ; (LHS = 0)
      
 
----- rest1  =G=  Restrição 1 - 5P onde P é o penúltimo número da matrícula
+---- rest1  =G=  Restrição 1 - 5P onde P é o penúltimo número da matrícula - produzir no máximo 51 milhões de barris de gasolina
 
 rest1..  x1 + 2*x2 + 2*x3 =G= 51 ; (LHS = 0, INFES = 51 ****)
      
 
----- rest2  =G=  Restrição 2 - 3U onde U é o último número da matrícula
+---- rest2  =G=  Restrição 2 - 3U onde U é o último número da matrícula - produzir no máximo 32 milhões de barris de óleo
 
 rest2..  x1 + x2 + 1.5*x3 =G= 32 ; (LHS = 0, INFES = 32 ****)
      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 3
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 3
 petrobas2
-Column Listing      SOLVE petrobras2 Using MIP From line 31
+Column Listing      SOLVE petrobras2 Using MIP From line 41
 
 
 ---- x1  Petróleo BR
@@ -91,9 +101,9 @@ z
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       obj
 
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 4
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 4
 petrobas2
-Model Statistics    SOLVE petrobras2 Using MIP From line 31
+Model Statistics    SOLVE petrobras2 Using MIP From line 41
 
 
 MODEL STATISTICS
@@ -106,17 +116,17 @@ NON ZERO ELEMENTS            10
 GENERATION TIME      =        0.002 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
 
 
-EXECUTION TIME       =        0.002 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 5
+EXECUTION TIME       =        0.003 SECONDS      3 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 5
 petrobas2
-Solution Report     SOLVE petrobras2 Using MIP From line 31
+Solution Report     SOLVE petrobras2 Using MIP From line 41
 
 
                S O L V E      S U M M A R Y
 
      MODEL   petrobras2          OBJECTIVE  z
      TYPE    MIP                 DIRECTION  MINIMIZE
-     SOLVER  CPLEX               FROM LINE  31
+     SOLVER  CPLEX               FROM LINE  41
 
 **** SOLVER STATUS     1 Normal Completion         
 **** MODEL STATUS      1 Optimal                   
@@ -143,8 +153,8 @@ Objective :         319.000000
 ---- EQU rest2             32.0000        32.0000        +INF            2.0000      
 
   obj  Função objetivo - Minimizar o uso dos recursos
-  rest1  Restrição 1 - 5P onde P é o penúltimo número da matrícula
-  rest2  Restrição 2 - 3U onde U é o último número da matrícula
+  rest1  Restrição 1 - 5P onde P é o penúltimo número da matrícula - produzir no máximo 51 milhões de barris de gasolina
+  rest2  Restrição 2 - 3U onde U é o último número da matrícula - produzir no máximo 32 milhões de barris de óleo
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
@@ -164,10 +174,10 @@ Objective :         319.000000
                              0  UNBOUNDED
 
 
-EXECUTION TIME       =        0.001 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/01/16 15:47:18 Page 6
+EXECUTION TIME       =  0.000E+0000 SECONDS      2 MB  24.6.1 r55820 LEX-LEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 LEX-LEG x86 64bit/Linux                                                                                                                                                                      03/03/16 14:41:59 Page 6
 petrobas2
-Solution Report     SOLVE petrobras2 Using MIP From line 31
+Solution Report     SOLVE petrobras2 Using MIP From line 41
 
 
 USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
@@ -176,5 +186,5 @@ USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
 
 **** FILE SUMMARY
 
-Input      /home/raphael/LP-problems/src/petrobras/petrobras2.gms
-Output     /home/raphael/LP-problems/src/petrobras/petrobras2.lst
+Input      /home/raphael/Cloud/workspace/LP-problems/src/petrobras/petrobras2.gms
+Output     /home/raphael/Cloud/workspace/LP-problems/src/petrobras/petrobras2.lst
